@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,23 +29,17 @@ public class MainActivity extends AppCompatActivity {
     Double rangeMax = 100.0;
 
 
+
     DecimalFormat VALUE_FORMAT = new DecimalFormat("0.##");
     Random r = new Random();
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        private FirebaseAuth mAuth;
-        private FirebaseAuth.AuthStateListener mAuthListener;
-
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-
-        myRef.setValue("Hello, World!");
 
         tvRound = (TextView)findViewById(R.id.textViewRound);
         tvRandom = (TextView)findViewById(R.id.textViewYourRandom);
@@ -71,18 +67,17 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+    }
 
-        public void onStart() {
-            super.onStart();
-            mAuth.addAuthStateListener(mAuthListener); //adds a listener to the object
+    public void onStart(){
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener); //adds a listener to the object
+    }
+
+    public void onStop(){
+        super.onStop();
+        if (mAuthListener != null) { //checks for an instance of mAuthListener
+            mAuth.removeAuthStateListener(mAuthListener);  //if there is, it will be removed
         }
-
-        public void onStop() {
-            super.onStop();
-            if (mAuthListener != null) { //checks for an instance of mAuthListener
-                mAuth.removeAuthStateListener(mAuthListener);  //if there is, it will be removed
-            }
-        }
-
     }
 }
