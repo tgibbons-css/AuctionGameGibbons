@@ -3,4 +3,8 @@
     <string name="enter_your_bid_here">Enter Your Bid Here:</string>
     <string name="round">Round</string>
     <string name="submit">Submit</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="create_user">CreateUser</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login">Login</string>
 </resources>
