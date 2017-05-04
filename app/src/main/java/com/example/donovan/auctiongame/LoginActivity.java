@@ -38,6 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         CreateUser = (Button) findViewById(R.id.buttonCreateUser);
 
 
+        mAuth = FirebaseAuth.getInstance();  //declare object for Firebase
+
+
         ButtonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("CIS3334", "Normal login ");
